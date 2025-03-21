@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import fantasyBooks from '../books/fantasy.json';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import SingleBookComp from './SingleBookComponent';
+import SingleBookComponent from './SingleBookComponent';
 
 
 export default function AllTheBooksComponents() {
@@ -41,7 +41,7 @@ export default function AllTheBooksComponents() {
         </Row>
         <Row>
           {books.slice(0, visibleBooks).map((book) => (
-            <SingleBookComp key={book.asin} book={book} />
+            <SingleBookComponent key={book.asin} book={book} />
           ))}
         </Row>
         {visibleBooks < fantasyBooks.length && (

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Col, Card, } from 'react-bootstrap';
+import CommentAreaComponent from './CommentAreaComponent';
 
-export default function SingleBookComp({book}) {
+export default function SingleBookComponent({book}) {
   const [selected, setSelected] = useState(false)
 
   const handleCLick = () => {
