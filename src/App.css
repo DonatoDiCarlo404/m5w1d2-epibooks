@@ -15,5 +15,16 @@ body {
     cursor: pointer;
 }
 
+.card-img-top {
+    width: 100%!important;
+    height: 400px;
+    object-fit: cover;
+    border: solid 1px #000000;
+}
+
+.card-body {
+    height: 150px;
+}
+
 
 
