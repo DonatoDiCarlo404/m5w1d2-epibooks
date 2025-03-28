@@ -6,13 +6,14 @@ import FooterComponent from './assets/components/FooterComponent';
 import WelcomeComponent from './assets/components/WelcomeComponent';
 import AllTheBooksComponents from './assets/components/AllTheBooksComponents';
 import scifiBooks from './assets/books/scifi.json';
+import { ThemeContext } from './modules/context';
 
 
 function App() {
 
   const [books, setBooks] = useState(scifiBooks)
-  
   const [search, setSearch] = useState('')
+  const [theme, setTheme] = useState('light')
   
   const handleSearch = (searchValue) => {
       setSearch (searchValue)
@@ -24,11 +25,12 @@ function App() {
 
   return (
     <>
-      <NavbarComponents search={search} onSearchChange={handleSearch}/>
+      <ThemeContext.Provider value={[ theme, setTheme ]}>
+      <NavbarComponents search={search} onSearchChange={handleSearch} />
       <WelcomeComponent />
       <AllTheBooksComponents books={books}/>
       <FooterComponent />
-      
+      </ThemeContext.Provider>
     </>
   )
 }
