@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ListGroup, Form, Button, Spinner } from 'react-bootstrap'
+import { ListGroup, Form, Button, Spinner, Alert } from 'react-bootstrap'
 import DeletePutCommentsComponent from './DeletePutCommentsComponent'
 
 const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JlMWE5ZTFlMTQwNjAwMTUzMTRkYjUiLCJpYXQiOjE3NDI4MzY0NTIsImV4cCI6MTc0NDA0NjA1Mn0.8x21mRjvNq7-6l5XoAkm-OX-qtIsBS3XpW9JdDIqhWM'
@@ -23,6 +23,8 @@ export default function CommentAreaComponent({ asin }) {
   }, [asin])
 
   const fetchComments = async () => {
+    if (!asin) return
+    setLoading(true)
     try {
       const response = await fetch(url, {
         headers: {
@@ -36,8 +38,25 @@ export default function CommentAreaComponent({ asin }) {
       }
     } catch (error) {
       console.log('Errore nel caricamento commenti:', error)
+    } finally {
+      setLoading(false)
     }
   }
+
+  if (!asin) {
+    return (<Alert variant='danger'>You haven't select a Book!</Alert>)
+  }
+
+  if (loading) {
+    return (
+      <div className='text-center my-3'>
+        <Spinner animation='grow' role='status'>
+        <span className='visually-hidden'>Loading...</span>
+        </Spinner>
+      </div>  
+    )  
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -56,7 +75,8 @@ export default function CommentAreaComponent({ asin }) {
       if (response.ok) {
         
         const updatedComment = await response.json()
-        setComments([...comments, updatedComment])
+        // setComments([...comments, updatedComment])
+        await fetchComments()
 
         setNewComment({
           comment: "", rate: 1, elementId: asin,
@@ -76,6 +96,23 @@ export default function CommentAreaComponent({ asin }) {
   
   return (
     <>
+     <ListGroup as="ol" numbered>
+        {comments.length > 0 ? (
+          comments.map((comment, i) => (
+            <ListGroup.Item key={i} as="li">
+              {comment.comment} - Rating: {comment.rate}
+              <DeletePutCommentsComponent 
+                comment={comment} 
+                onCommentUpdate={fetchComments} 
+              />
+            </ListGroup.Item>
+          ))
+        ) : (
+          <Alert variant="secondary">
+            No comments yet. Be the first to comment!
+          </Alert>
+        )}
+      </ListGroup>
     <ListGroup as="ol" numbered>
       {comments.map((comment, i) => (
        <ListGroup.Item key={i} as="li">

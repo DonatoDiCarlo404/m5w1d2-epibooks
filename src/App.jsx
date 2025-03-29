@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComponents from './assets/components/NavbarComponents';
 import FooterComponent from './assets/components/FooterComponent';
 import WelcomeComponent from './assets/components/WelcomeComponent';
-import AllTheBooksComponents from './assets/components/AllTheBooksComponents';
 import scifiBooks from './assets/books/scifi.json';
+import MainComponent from './assets/components/MainComponent';
 import { ThemeContext } from './modules/context';
 
 
@@ -28,7 +28,7 @@ function App() {
       <ThemeContext.Provider value={[ theme, setTheme ]}>
       <NavbarComponents search={search} onSearchChange={handleSearch} />
       <WelcomeComponent />
-      <AllTheBooksComponents books={books}/>
+      <MainComponent books={books} />
       <FooterComponent />
       </ThemeContext.Provider>
     </>
