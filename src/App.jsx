@@ -14,6 +14,7 @@ function App() {
   const [books, setBooks] = useState(scifiBooks)
   const [search, setSearch] = useState('')
   const [theme, setTheme] = useState('light')
+  const [selectedAsin, setSelectedAsin] = useState(null)
   
   const handleSearch = (searchValue) => {
       setSearch (searchValue)
@@ -28,7 +29,7 @@ function App() {
       <ThemeContext.Provider value={[ theme, setTheme ]}>
       <NavbarComponents search={search} onSearchChange={handleSearch} />
       <WelcomeComponent />
-      <MainComponent books={books} />
+      <MainComponent books={books} selectedAsin={selectedAsin} setSelectedAsin={setSelectedAsin}/>
       <FooterComponent />
       </ThemeContext.Provider>
     </>

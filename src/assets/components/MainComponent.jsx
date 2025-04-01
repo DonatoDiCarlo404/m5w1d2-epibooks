@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import AllTheBooksComponents from './AllTheBooksComponents'
 import CommentAreaComponent from './CommentAreaComponent'
 
-export default function MainComponent({ books }) {
-
-  const [selectedBook, setSelectedBook] = useState(null)
+export default function MainComponent({ books, selectedAsin, setSelectedAsin }) {
 
   return (
     <Container fluid>
@@ -13,14 +11,14 @@ export default function MainComponent({ books }) {
         <Col md={8}>
           <AllTheBooksComponents 
             books={books}
-            selectedBook={selectedBook}
-            onBookSelect={setSelectedBook}
+            selectedAsin={selectedAsin}
+            onBookSelect={setSelectedAsin}
           />
         </Col>
         <Col md={4}>
-          {selectedBook && (
+          {selectedAsin && (
             <div className="sticky-top pt-3">
-              <CommentAreaComponent asin={selectedBook.asin} />
+              <CommentAreaComponent asin={selectedAsin} key={selectedAsin}/>
             </div>
           )}
         </Col>
