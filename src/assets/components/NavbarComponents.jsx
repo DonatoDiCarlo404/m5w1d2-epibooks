@@ -1,6 +1,7 @@
 import React from 'react'
 import { useContext } from 'react';
 import { Navbar, Container, Nav, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../modules/context';
 
 export default function NavbarComponents({ search, onSearchChange }) {
@@ -19,7 +20,7 @@ export default function NavbarComponents({ search, onSearchChange }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#" >Home</Nav.Link>
+            <Link to="/" className='nav-link'>Home</Link>
             <Nav.Link href="#">About</Nav.Link>
             <Nav.Link href="#">Browser</Nav.Link>
           </Nav>
@@ -29,7 +30,8 @@ export default function NavbarComponents({ search, onSearchChange }) {
             } else {
               setTheme('light')
           }}
-          }>Theme</Button>
+          }>
+            <span><i className="bi bi-sun me-2"></i></span>Theme</Button>
           <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
               type="text"

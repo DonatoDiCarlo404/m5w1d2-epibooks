@@ -17,14 +17,44 @@ body {
 
 .card-img-top {
     width: 100%!important;
-    height: 400px;
+    height: 320px;
     object-fit: cover;
     border: solid 1px #000000;
 }
 
 .card-body {
+    display: flex;
+    flex-direction: column;
     height: 150px;
 }
 
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+.main-content {
+    flex: 1;
+}
+  
+footer {
+    margin-top: auto;
+}
 
+.error-alert {
+    margin: 10em;
+}
 
+.bi-sign-stop {
+    font-size: xx-large;
+}
+
+.card-title {
+    margin-bottom: auto;
+}
+
+.card button {
+    width: fit-content;
+    margin: 0 auto;
+}

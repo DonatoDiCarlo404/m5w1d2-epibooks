@@ -7,7 +7,7 @@ import { ThemeContext } from '../../modules/context';
 
 
 
-export default function AllTheBooksComponents({ books, selectedBook, onBookSelect }) {
+export default function AllTheBooksComponents({ books, selectedAsin, setSelectedAsin }) {
   const [theme, setTheme] = useContext(ThemeContext)
   const [visibleBooks, setvisibleBooks] = useState(8);
   
@@ -25,13 +25,14 @@ export default function AllTheBooksComponents({ books, selectedBook, onBookSelec
         </Row>
         <Row>
           {books.slice(0, visibleBooks).map((book) => (
-            <SingleBookComponent key={book.asin} book={book} selected={selectedBook?.asin === book.asin} onBookSelect={onBookSelect} />
+            <SingleBookComponent key={book.asin} book={book} selectedAsin={selectedAsin} setSelectedAsin={setSelectedAsin} />
           ))}
         </Row>
         {visibleBooks < scifiBooks.length && (
           <Row className="mt-4">
             <Col className="text-center">
-              <Button variant={theme} onClick={loadMoreBooks}>Set More</Button>
+              <Button variant={theme} onClick={loadMoreBooks}>
+                <span><i className="bi bi-download me-2"></i></span>Set More</Button>
             </Col>
           </Row>
         )}

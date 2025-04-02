@@ -18,13 +18,6 @@ export default function CommentAreaComponent({ asin }) {
   const [loading, setLoading] = useState(false)
   const [theme, setTheme] = useContext(ThemeContext)
 
-  useEffect(() => {
-    setNewComment(prev => ({ ...prev, elementId: asin }))
-  }, [asin])
-
-  useEffect(() => {
-    fetchComments()
-  }, [asin])
 
   
   const fetchComments = async () => {
@@ -47,21 +40,12 @@ export default function CommentAreaComponent({ asin }) {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    setNewComment(prev => ({ ...prev, elementId: asin }))
+    fetchComments()
+  }, [asin])
   
-  if (!asin) {
-    return (<Alert variant='danger'>You haven't select a Book!</Alert>)
-  }
-
-  if (loading) {
-    return (
-      <div className='text-center my-3'>
-        <Spinner animation='grow' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-        </Spinner>
-      </div>  
-    )  
-  }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -100,7 +84,21 @@ export default function CommentAreaComponent({ asin }) {
 
   
   return (
-    <>
+    <div className="mt-4">
+    <h3 className={`text-${theme === 'dark' ? 'dark' : 'light'} fw-bold text-center mb-4`}>
+      Choose your book and leave a comment!
+    </h3>
+
+    {!asin ? (
+        <Alert variant='info'>Select a book to see its comments!</Alert>
+      ) : loading ? (
+        <div className='text-center my-3'>
+          <Spinner animation='grow' role='status'>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
+        </div>
+      ) : (
+        <>
      <ListGroup as="ol" numbered bg={theme} data-bs-theme={theme}>
       {comments.map((comment, i) => (
        <ListGroup.Item key={i} as="li">
@@ -133,6 +131,7 @@ export default function CommentAreaComponent({ asin }) {
           />
         </Form.Group>
         <Button type="submit" variant='success' disabled={loading}>
+          <span><i className="bi bi-send-plus me-2"></i></span>
   {loading ? (
     <>
       <Spinner
@@ -151,5 +150,7 @@ export default function CommentAreaComponent({ asin }) {
 </Button>
       </Form>
     </>
+  )}
+  </div>
   )
 }

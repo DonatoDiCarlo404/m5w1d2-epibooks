@@ -12,13 +12,13 @@ export default function MainComponent({ books, selectedAsin, setSelectedAsin }) 
           <AllTheBooksComponents 
             books={books}
             selectedAsin={selectedAsin}
-            onBookSelect={setSelectedAsin}
+            setSelectedAsin={setSelectedAsin}
           />
         </Col>
         <Col md={4}>
           {selectedAsin && (
             <div className="sticky-top pt-3">
-              <CommentAreaComponent asin={selectedAsin} key={selectedAsin}/>
+              <CommentAreaComponent asin={selectedAsin} />
             </div>
           )}
         </Col>

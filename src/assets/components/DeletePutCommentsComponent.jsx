@@ -79,6 +79,7 @@ export default function DeletePutCommentsComponent( { comment, onCommentUpdate }
             />
           </Form.Group>
           <Button type="submit" size='sm' variant="warning" className="me-2" disabled={loading}>
+            <span><i className="bi bi-floppy me-2"></i></span>
           {loading ? (
            <>
              <Spinner
@@ -96,15 +97,18 @@ export default function DeletePutCommentsComponent( { comment, onCommentUpdate }
           )}
           </Button>
           <Button variant="secondary" size='sm' onClick={() => setIsEditing(false)}>
-            Cancel
+            <span><i className="bi bi-skip-backward me-2"></i></span>
+            Back
           </Button>
         </Form>
         ) : (
           <>
             <Button variant="warning" size='sm' onClick={() => setIsEditing(true)} className="me-2">
+              <span><i className="bi bi-pen me-2"></i></span>
               Edit
             </Button>
             <Button variant="danger" size='sm' onClick={handleDelete}>
+              <span><i className="bi bi-trash me-2"></i></span>
               Delete
             </Button>
           </>
