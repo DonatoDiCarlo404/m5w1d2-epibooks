@@ -3,7 +3,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComponents from './assets/components/NavbarComponents';
 import FooterComponent from './assets/components/FooterComponent';
-import scifiBooks from './assets/books/scifi.json';
+import allBooks from './assets/books/allBooks';
 import { ThemeContext } from './modules/context';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './assets/pages/HomePage';
@@ -13,7 +13,7 @@ import DetailPage from './assets/pages/DetailPage';
 
 function App() {
 
-  const [books, setBooks] = useState(scifiBooks)
+  const [books, setBooks] = useState(allBooks)
   const [search, setSearch] = useState('')
   const [theme, setTheme] = useState('light')
   const [selectedAsin, setSelectedAsin] = useState(null)
@@ -21,7 +21,7 @@ function App() {
   const handleSearch = (searchValue) => {
       setSearch (searchValue)
       
-      const filteredBooks = scifiBooks.filter(book => book.title.toLowerCase().includes(searchValue.toLowerCase()))
+      const filteredBooks = allBooks.filter(book => book.title.toLowerCase().includes(searchValue.toLowerCase()))
       setBooks(filteredBooks)  
     }
   

@@ -8,7 +8,8 @@ export default function SingleBookComponent({ book, selectedAsin, setSelectedAsi
   const [theme, setTheme] = useContext(ThemeContext)
   const navigate = useNavigate();
 
-  const handleDetails = () => {
+  const handleDetails = (e) => {
+    e.stopPropagation() // non apre il form laterale al click del bottone Details
     navigate(`/details/${book.asin}`)
   }
   

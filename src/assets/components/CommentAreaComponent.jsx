@@ -86,7 +86,7 @@ export default function CommentAreaComponent({ asin }) {
   return (
     <div className="mt-4">
     <h3 className={`text-${theme === 'dark' ? 'dark' : 'light'} fw-bold text-center mb-4`}>
-      Choose your book and leave a comment!
+      Leave a comment for your favourite book!
     </h3>
 
     {!asin ? (
@@ -108,9 +108,9 @@ export default function CommentAreaComponent({ asin }) {
       ))}
     </ListGroup>
 
-      <Form onSubmit={handleSubmit} className="my-4">
+      <Form onSubmit={handleSubmit} className="my-4" bg={theme} data-bs-theme={theme}>
         <Form.Group className="mb-3">
-          <Form.Label className='text-black'>Comment</Form.Label>
+          <Form.Label className={`text-${theme === 'dark' ? 'dark' : 'light'}`}>Comment</Form.Label>
           <Form.Control
             type="text"
             value={newComment.comment}
@@ -118,7 +118,7 @@ export default function CommentAreaComponent({ asin }) {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label className='text-black'>Rating (1-5)</Form.Label>
+          <Form.Label className={`text-${theme === 'dark' ? 'dark' : 'light'}`}>Rating (1-5)</Form.Label>
           <Form.Control
             type="number"
             min="1"
