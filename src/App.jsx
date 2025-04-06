@@ -5,11 +5,20 @@ import NavbarComponents from './assets/components/NavbarComponents';
 import FooterComponent from './assets/components/FooterComponent';
 import allBooks from './assets/books/allBooks';
 import { ThemeContext } from './modules/context';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import HomePage from './assets/pages/HomePage';
 import NotFoundComponent from './assets/components/NotFoundComponent';
 import DetailPage from './assets/pages/DetailPage';
 
+
+function GenreRoute({ books, selectedAsin, setSelectedAsin }) {
+  const { genre } = useParams()
+  const filteredBooks = books.filter(book => book.category === genre)
+
+  return (
+    <HomePage books={filteredBooks} selectedAsin={selectedAsin} setSelectedAsin={setSelectedAsin} />
+  )
+}
 
 function App() {
 
@@ -34,6 +43,7 @@ function App() {
       <main className="main-content">
       <Routes>
         <Route path="/" element={<HomePage books={books} selectedAsin={selectedAsin} setSelectedAsin={setSelectedAsin} />} />
+        <Route path="/genre/:genre" element={<GenreRoute books={books} selectedAsin={selectedAsin} setSelectedAsin={setSelectedAsin} />} />
         <Route path="/details/:asin" element={<DetailPage />} />
         <Route path="*" element={<NotFoundComponent />} />
       </Routes>
