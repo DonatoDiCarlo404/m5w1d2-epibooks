@@ -24,13 +24,14 @@ export default function SingleBookComponent({ book, selectedAsin, setSelectedAsi
   }
 
   return (
-    <Col md={3} xs={6}>
-      <Card className="mb-4" onClick={handleBookClick} style={{ border: selectedAsin === book.asin ? "3px solid red" : "none" }}>
-        <Card.Img variant="top" src={book.img} />
-        <Card.Body className='d-flex flex-column'>
-          <Card.Title className='h6 mb-auto'>{book.title}</Card.Title>
+    <Col xs={12} sm={6} md={4} lg={3} className="mb-3">
+      <Card className="h-100 shadow-sm" onClick={handleBookClick} style={{ border: selectedAsin === book.asin ? "3px solid red" : "none", transition: "transform 0.2s", minHeight: "400px" }}>
+        <Card.Img variant="top" src={book.img} style={{ height: '200px', objectFit: 'contain', padding: '10px', '@media (maxWidth: 573px)': {height: '150px'} }}/>
+        <Card.Body className='d-flex flex-column justify-content-between'>
+          <Card.Title className='h6' style={{ display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', minHeight: '2.5rem'}}>
+            {book.title}</Card.Title>
           <div className='text-center mt-2'>
-          <Button variant={theme} className='border border-black border-2' onClick={handleDetails}>
+          <Button variant={theme} className='border border-black border-1 px-3' onClick={handleDetails}>
             <span><i className="bi bi-eyeglasses me-2"></i></span>See Details</Button>
           </div>
         </Card.Body>

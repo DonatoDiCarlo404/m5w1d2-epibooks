@@ -12,10 +12,11 @@ export default function NavbarComponents({ search, onSearchChange }) {
   const genres = useMemo(() => {
     const oneGenre = new Set(allBooks.map((book) => book.category))
     return Array.from(oneGenre).sort()
+    .map((genre) => genre.charAt(0).toUpperCase() + genre.slice(1))
   }, [])
 
   const handleGenreSelect = (genre) => {
-    navigate(`/genre/${genre}`)
+    navigate(`/genre/${genre.toLowerCase()}`)
   }
 
   const handleSubmit = (e) => {
@@ -24,19 +25,24 @@ export default function NavbarComponents({ search, onSearchChange }) {
 
 
   return (
-    <Navbar  expand="lg" bg={theme} data-bs-theme={theme}>
+    <Navbar  expand="lg" bg={theme} data-bs-theme={theme} className='py-2'>
       <Container fluid>
+      <img 
+          src="/book-svg.jpg" alt="EpiBooks Logo" style={{ height: '40px', marginRight: '10px' }}
+        />
         <Navbar.Brand href="#">EpiBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link to="/" className='nav-link'>Home</Link>
-            <Nav.Link href="#">About</Nav.Link>
-            <Nav.Link href="#">Browser</Nav.Link>
           </Nav>
           <NavDropdown title="Genres" id="basic-nav-dropdown" className={`text-${theme === 'light' ? 'dark' : 'light'} me-4`}>
             {genres.map((genre, i) => (
-              <NavDropdown.Item key={i} onClick={() => handleGenreSelect(genre)}>{genre}</NavDropdown.Item>))}
+              <React.Fragment key={i}>
+              <NavDropdown.Item key={i} onClick={() => handleGenreSelect(genre)}>{genre}</NavDropdown.Item>
+              {i < genres.length - 1 && <NavDropdown.Divider />}
+              </React.Fragment>
+            ))}
             </NavDropdown>
           <Button variant="secondary" className='me-2' onClick={() => {
             if (theme === 'light') {

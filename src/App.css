@@ -1,15 +1,10 @@
 body {
-    background-color: #5d5d5d!important;
+    background-color: #5a5a5a!important;
 }
 
 .navbar-toggler {
     background-color: white!important;
 }
-
-/* .alert {
-    background-color: #ebbe6b!important;
-    color: #000000!important;
-} */
 
 .card {
     cursor: pointer;
@@ -20,6 +15,7 @@ body {
     height: 320px;
     object-fit: cover;
     border: solid 1px #000000;
+    background-color: bisque;
 }
 
 .card-body {
@@ -59,9 +55,21 @@ footer {
     margin: 0 auto;
 }
 
-.detailed-card {
-    width: 100%!important;
-    height: 500px!important;
-    object-fit: cover;
-    border: solid 1px #000000;
+.card-body {
+    background-color: rgb(235, 198, 130);
 }
+
+.detailed-card {
+    max-width: 100%;
+    height: auto !important;
+    object-fit: contain;
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .detailed-card {
+        max-height: 400px;
+        padding: 10px;
+    }
+}
+
